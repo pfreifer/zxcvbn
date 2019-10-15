@@ -1,7 +1,7 @@
 import zxcvbn as zx
 import json
 
-results = zx.zxcvbn('hello world')
+results = zx.zxcvbn('a1b3c5d7e')
 
 for x in results:
     try :
@@ -9,10 +9,9 @@ for x in results:
         for y in results[x]:
             d = results[x][y]
             if k != "":
-                print(k)
+                print("\n", k)
                 k = ""
             print("\t", y, ":", d)
     except:
-        print(x, ":", results[x])
+        print("\n", x, ":", results[x])
 
-    print("\n")

@@ -236,6 +236,7 @@ def estimate_guesses(match, password):
         'spatial': spatial_guesses,
         'repeat': repeat_guesses,
         'sequence': sequence_guesses,
+        'alternate_sequence': alternate_sequence_guesses,
         'regex': regex_guesses,
         'date': date_guesses,
     }
@@ -292,6 +293,19 @@ def sequence_guesses(match):
         base_guesses *= 2
 
     return base_guesses * len(match['token'])
+
+
+def alternate_sequence_guesses(match):
+    m1 = {
+        'token': match['sequence_1'],
+        'ascending': match['ascending_1']
+    }
+    m2 = {
+        'token': match['sequence_2'],
+        'ascending': match['ascending_2']
+    }
+    
+    return sequence_guesses(m1) + sequence_guesses(m2)
 
 
 def regex_guesses(match):

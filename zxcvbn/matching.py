@@ -77,6 +77,8 @@ DATE_SPLITS = {
 # omnimatch -- perform all matches
 def omnimatch(password, _ranked_dictionaries=RANKED_DICTIONARIES):
     matches = []
+    if not password:
+        return matches
     for matcher in [
         dictionary_match,
         reverse_dictionary_match,
@@ -84,6 +86,7 @@ def omnimatch(password, _ranked_dictionaries=RANKED_DICTIONARIES):
         spatial_match,
         repeat_match,
         sequence_match,
+        alternate_sequence_match,
         regex_match,
         date_match,
     ]:
@@ -437,6 +440,49 @@ def sequence_match(password, _ranked_dictionaries=RANKED_DICTIONARIES):
         last_delta = delta
     update(i, len(password) - 1, last_delta)
 
+    return result
+
+
+def alternate_sequence_match(password, _ranked_dictionaries=RANKED_DICTIONARIES):
+    # Does the same than sequence_match on even and odd index characters.
+    if len(password) == 1:
+        return []
+
+    even_index_password = ""
+    odd_index_password = ""
+
+    for i in range(len(password)):
+        if (i%2):
+            odd_index_password += password[i]
+        else:
+            even_index_password += password[i]
+
+    result_even = sequence_match(even_index_password, _ranked_dictionaries)
+    result_odd = sequence_match(odd_index_password, _ranked_dictionaries)
+    result = []
+
+    for x in result_even:
+        x['i'] = 2*x['i']
+        x['j'] = 2*x['j']
+            
+    for x in result_odd:
+        x['i'] = 2*x['i']+1
+        x['j'] = 2*x['j']+1
+        for y in result_even:
+            if (abs(x['i'] - y['i']) == 1) and (abs(x['j'] - y['j']) == 1):
+                result.append({
+                    'pattern': 'alternate_sequence',
+                    'i': min(x['i'], y['i']),
+                    'j':  max(x['j'], y['j']),
+                    'token': password[min(x['i'], y['i']): max(x['j'], y['j'])+1],
+                    'sequence_1': x['token'],
+                    'sequence_2': y['token'],
+                    'sequence_1_name': x['sequence_name'],
+                    'sequence_2_name': y['sequence_name'],
+                    'ascending_1': x['ascending'],
+                    'ascending_2': y['ascending']
+                })
+        
     return result
 
 
