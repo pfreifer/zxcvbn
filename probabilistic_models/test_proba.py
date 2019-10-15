@@ -1,4 +1,3 @@
-import grammars
 import construct
 
 fl = {
@@ -21,4 +20,4 @@ add_frequency_lists(fl)
 
 print(grammars.char_type('m'))
 
-print(construct.construct_grammar_model())
+print(grammars.construct_grammar_model())
