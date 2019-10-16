@@ -1,4 +1,5 @@
-import construct
+import grammars
+import score
 
 fl = {
     "1":"aaaaa123bb,ccc**azerty".split(","),
@@ -10,7 +11,6 @@ def build_ranked_dict(ordered_list):
 
 RD = {}
 
-print("aaa" in RD)
 
 def add_frequency_lists(frequency_lists_):
     for name, lst in frequency_lists_.items():
@@ -18,6 +18,8 @@ def add_frequency_lists(frequency_lists_):
 
 add_frequency_lists(fl)
 
-print(grammars.char_type('m'))
+Q,B = grammars.construct_grammar_model()
+print(Q,B)
 
-print(grammars.construct_grammar_model())
+print(score.score("qwerty", Q, B))
+print(score.score("abc123", Q, B))

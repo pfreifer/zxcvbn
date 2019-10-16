@@ -12,7 +12,7 @@ def add_frequency_lists(frequency_lists_):
 add_frequency_lists(FREQUENCY_LISTS)
 
 
-def base(w) :
+def bases(w) :
 
     simple_bases = []
     composed_base = ''
@@ -45,7 +45,6 @@ def construct_grammar_model(_ranked_dictionaries=RANKED_DICTIONARIES):
 
     for dictionary_name, ranked_dict in _ranked_dictionaries.items():
         for w in ranked_dict:
-            print(w)
             simple_bases, composed_base = bases(w)
             cb_counter += 1
             if composed_base in composed_bases_dict:
