@@ -6,7 +6,7 @@ from .adjacency_graphs import ADJACENCY_GRAPHS
 
 from decimal import Decimal
 
-from .probabilistic_model import probabilistic_model_guesses, probabilistic_sequence
+from zxcvbn.probabilistic_models.probabilistic_model import probabilistic_model_guesses, probabilistic_sequence
 
 
 def calc_average_degree(graph):
