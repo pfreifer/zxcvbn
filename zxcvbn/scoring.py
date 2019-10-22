@@ -6,7 +6,7 @@ from .adjacency_graphs import ADJACENCY_GRAPHS
 
 from decimal import Decimal
 
-from zxcvbn.probabilistic_models.probabilistic_model import probabilistic_model_guesses, probabilistic_sequence
+from zxcvbn.probabilistic_models.probabilistic_model import probabilistic_model_guesses
 
 
 def calc_average_degree(graph):
@@ -216,7 +216,7 @@ def most_guessable_match_sequence(password, matches, _exclude_additive=False):
         probabilistic_guesses = probabilistic_model_guesses(password)
         if probabilistic_guesses <= guesses:
             guesses = probabilistic_guesses
-            optimal_match_sequence = probabilistic_sequence(password)
+            optimal_match_sequence = {'pattern':'probabilistic model'}
     # final result object
     return {
         'password': password,

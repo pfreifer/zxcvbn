@@ -1,9 +1,10 @@
-from zxcvbn import scoring
+from zxcvbn.zxcvbn import scoring
+from zxcvbn.zxcvbn.scoring import most_guessable_match_sequence
 from . import adjacency_graphs
-from zxcvbn.frequency_lists import FREQUENCY_LISTS
+from zxcvbn.zxcvbn.frequency_lists import FREQUENCY_LISTS
 import re
 
-from zxcvbn.scoring import most_guessable_match_sequence
+
 
 
 def build_ranked_dict(ordered_list):

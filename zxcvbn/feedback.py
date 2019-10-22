@@ -1,4 +1,4 @@
-from zxcvbn.scoring import START_UPPER, ALL_UPPER
+from zxcvbn.zxcvbn.scoring import START_UPPER, ALL_UPPER
 from gettext import gettext as _
 
 

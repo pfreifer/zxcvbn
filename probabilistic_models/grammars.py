@@ -1,5 +1,5 @@
-from zxcvbn.frequency_lists import FREQUENCY_LISTS
-import grammar_utils as gru
+from zxcvbn.zxcvbn.frequency_lists import FREQUENCY_LISTS
+import zxcvbn.probabilistic_models.grammar_utils as gru
 
 def build_ranked_dict(ordered_list):
     return {word: idx for idx, word in enumerate(ordered_list, 1)}

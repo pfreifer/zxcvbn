@@ -1,13 +1,15 @@
 from zxcvbn.probabilistic_models import grammars
-from zxcvbn.probabilistic_models.score import score
+from zxcvbn.probabilistic_models.grammar_utils import score
 
-def probabilistic_model_guesses(password, n, scores=SCORES):
-    Q, B = grammars.construct_grammar_model()
-    sw = score(password, Q, B)
+def probabilistic_model_guesses(password, scores):
+    Q, B, lc, ls  = grammars.construct_grammar_model()
+    score_password = score(password, Q, B)
 
-    rw, i = 0
-    while sw <= scores[i] and i<= len(scores) :
-        rw += 1/ (score[i]*n)
-        i+=1
-    return rw
+    len_score = len(scores)
+    rank_password = 0
+    for i in range(len_score) :
+        if scores[i] > score_password :
+            rank_password += 1/ (scores[i]*len_score)
+    return int(rank_password)
+
 

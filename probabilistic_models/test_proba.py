@@ -1,6 +1,9 @@
-import grammars
-import grammar_utils as gru
-import random_set as rs
+
+import zxcvbn.probabilistic_models.grammar_utils as gru
+import zxcvbn.probabilistic_models.random_set as rs
+
+from zxcvbn.probabilistic_models import grammars
+from zxcvbn.probabilistic_models.probabilistic_model import probabilistic_model_guesses
 
 fl = {
     "1":"aaaaa123bb,ccc**azerty".split(","),
@@ -24,4 +27,6 @@ Q,B,lc,ls = grammars.construct_grammar_model()
 print(gru.score("qwerty", Q, B))
 print(gru.score("abc123", Q, B))
 
-print(rs.scores(1000000, lc, ls, Q, B))
+#print(rs.scores(1000000, lc, ls, Q, B))
+
+print(probabilistic_model_guesses("password", rs.scores(100000, lc, ls, Q, B)))
