@@ -6,6 +6,8 @@ from .adjacency_graphs import ADJACENCY_GRAPHS
 
 from decimal import Decimal
 
+from .probabilistic_model import probabilistic_model_guesses, probabilistic_sequence
+
 
 def calc_average_degree(graph):
     average = 0
@@ -202,14 +204,19 @@ def most_guessable_match_sequence(password, matches, _exclude_additive=False):
         bruteforce_update(k)
 
     optimal_match_sequence = unwind(n)
+    print(optimal_match_sequence)
     optimal_l = len(optimal_match_sequence)
+    print(optimal_l)
 
     # corner: empty password
     if len(password) == 0:
         guesses = 1
     else:
         guesses = optimal['g'][n - 1][optimal_l]
-
+        probabilistic_guesses = probabilistic_model_guesses(password)
+        if probabilistic_guesses <= guesses:
+            guesses = probabilistic_guesses
+            optimal_match_sequence = probabilistic_sequence(password)
     # final result object
     return {
         'password': password,
@@ -239,6 +246,7 @@ def estimate_guesses(match, password):
         'alternate_sequence': alternate_sequence_guesses,
         'regex': regex_guesses,
         'date': date_guesses,
+        'probabilistic_model': probabilistic_model_guesses,
     }
 
     guesses = estimation_functions[match['pattern']](match)

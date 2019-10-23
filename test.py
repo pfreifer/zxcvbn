@@ -1,6 +1,6 @@
 import zxcvbn as zx
 
-results = zx.zxcvbn('a1b3c5d7e')
+results = zx.zxcvbn('qw56erty')
 
 for x in results:
     try:
