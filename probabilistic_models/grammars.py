@@ -1,4 +1,5 @@
 from zxcvbn.frequency_lists import FREQUENCY_LISTS
+import grammar_utils as gru
 
 def build_ranked_dict(ordered_list):
     return {word: idx for idx, word in enumerate(ordered_list, 1)}
@@ -11,33 +12,11 @@ def add_frequency_lists(frequency_lists_):
 
 add_frequency_lists(FREQUENCY_LISTS)
 
-
-def bases(w) :
-
-    simple_bases = []
-    composed_base = ''
-    word =''
-    for c in w:
-        if word == '': word = c
-        elif char_type(word[-1]) == char_type(c):
-            word += c
-        else :
-            simple_bases.append(word)
-            composed_base += char_type(word[-1]) + str(len(word))
-            word = c
-    simple_bases.append(word)
-    composed_base += char_type(word[-1]) + str(len(word))
-    return simple_bases, composed_base
-
-def char_type(c):
-    if c.isdigit() : return 'D'
-    elif c.isalpha(): return 'L'
-    else : return 'S'
-
-
 def construct_grammar_model(_ranked_dictionaries=RANKED_DICTIONARIES):
     composed_bases_dict = dict()
     simple_bases_dict = dict()
+    composed_bases_list = []
+    simple_bases_lists = dict()
     composed_base = ""
     simple_bases = []
     cb_counter = 0
@@ -45,7 +24,15 @@ def construct_grammar_model(_ranked_dictionaries=RANKED_DICTIONARIES):
 
     for dictionary_name, ranked_dict in _ranked_dictionaries.items():
         for w in ranked_dict:
-            simple_bases, composed_base = bases(w)
+            simple_bases, composed_base = gru.bases(w)
+            composed_bases_list.append(composed_base)
+            simple_bases_pattern = gru.cut(composed_base)
+            for i in range(len(simple_bases)):
+                p = simple_bases_pattern[i]
+                if p in simple_bases_lists:
+                    simple_bases_lists[p].append(simple_bases[i])
+                else:
+                    simple_bases_lists[p] = [simple_bases[i]]
             cb_counter += 1
             if composed_base in composed_bases_dict:
                 composed_bases_dict[composed_base] += 1
@@ -57,11 +44,13 @@ def construct_grammar_model(_ranked_dictionaries=RANKED_DICTIONARIES):
                     simple_bases_dict[b] += 1
                 else:
                     simple_bases_dict[b] = 1
-
+    print(cb_counter, sb_counter)
     for cb in composed_bases_dict:
         composed_bases_dict[cb] /= cb_counter
     for sb in simple_bases_dict:
         simple_bases_dict[sb] /= sb_counter
 
-    return composed_bases_dict, simple_bases_dict
+    return composed_bases_dict, simple_bases_dict, composed_bases_list, simple_bases_lists
 
+
+    

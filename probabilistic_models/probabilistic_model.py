@@ -1,5 +1,5 @@
 from zxcvbn.probabilistic_models import grammars
-from zxcvbn.probabilistic_models import score
+from zxcvbn.probabilistic_models.score import score
 
 def probabilistic_model_guesses(password, n, scores=SCORES):
     Q, B = grammars.construct_grammar_model()

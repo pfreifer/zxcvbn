@@ -1,5 +1,6 @@
 import grammars
-import score
+import grammar_utils as gru
+import random_set as rs
 
 fl = {
     "1":"aaaaa123bb,ccc**azerty".split(","),
@@ -18,8 +19,9 @@ def add_frequency_lists(frequency_lists_):
 
 add_frequency_lists(fl)
 
-Q,B = grammars.construct_grammar_model()
-print(Q,B)
+Q,B,lc,ls = grammars.construct_grammar_model()
 
-print(score.score("qwerty", Q, B))
-print(score.score("abc123", Q, B))
+print(gru.score("qwerty", Q, B))
+print(gru.score("abc123", Q, B))
+
+print(rs.scores(1000000, lc, ls, Q, B))
