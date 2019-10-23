@@ -216,7 +216,7 @@ def most_guessable_match_sequence(password, matches, _exclude_additive=False):
         probabilistic_guesses = probabilistic_model_guesses(password)
         if probabilistic_guesses <= guesses:
             guesses = probabilistic_guesses
-            optimal_match_sequence = {'pattern':'probabilistic model'}
+            optimal_match_sequence = [{'pattern':'probabilistic model'}]
     # final result object
     return {
         'password': password,

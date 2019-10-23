@@ -19,6 +19,13 @@ def get_feedback(score, sequence):
         }
 
     longest_match = sequence[0]
+    
+    if longest_match['pattern'] == 'probabilistic model':
+        return {
+            'warning': '',
+            'suggestions': [],
+        }
+    
     for match in sequence[1:]:
         if len(match['token']) > len(longest_match['token']):
             longest_match = match
