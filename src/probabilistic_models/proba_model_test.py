@@ -1,3 +1,5 @@
+import pickle
+
 import probabilistic_models.grammar_utils as gru
 import probabilistic_models.random_set as rs
 
@@ -31,5 +33,5 @@ if __name__ == "__main__":
     print(gru.score("abc123", Q, B))
 
     # print(rs.scores(1000000, lc, ls, Q, B))
-
-    print(probabilistic_model_guesses("password", rs.scores(100000, lc, ls, Q, B)))
+    rs.scores(1000000)
+    print(probabilistic_model_guesses("password"))

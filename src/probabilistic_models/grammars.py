@@ -1,5 +1,6 @@
 import probabilistic_models.grammar_utils as gru
 from zxcvbn_functions.frequency_lists import FREQUENCY_LISTS
+import pickle
 
 
 def build_ranked_dict(ordered_list):
@@ -55,7 +56,8 @@ def construct_grammar_model(_ranked_dictionaries=RANKED_DICTIONARIES):
     for sb in simple_bases_dict:
         simple_bases_dict[sb] /= sb_counter
 
+    pickle.dump((composed_bases_dict, simple_bases_dict), open("dictionaries.p", "wb"))
+    pickle.dump((composed_bases_list, simple_bases_lists), open("lists.p", "wb"))
+
     return composed_bases_dict, simple_bases_dict, composed_bases_list, simple_bases_lists
 
-
-    
