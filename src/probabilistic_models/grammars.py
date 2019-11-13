@@ -50,14 +50,10 @@ def construct_grammar_model(_ranked_dictionaries=RANKED_DICTIONARIES):
                     simple_bases_dict[b] += 1
                 else:
                     simple_bases_dict[b] = 1
-    print(cb_counter, sb_counter)
-    for cb in composed_bases_dict:
-        composed_bases_dict[cb] /= cb_counter
-    for sb in simple_bases_dict:
-        simple_bases_dict[sb] /= sb_counter
 
-    pickle.dump((composed_bases_dict, simple_bases_dict), open("dictionaries.p", "wb"))
+    pickle.dump((cb_counter, composed_bases_dict), open("cb_dictionary.p", "wb"))
+    pickle.dump((sb_counter, simple_bases_dict), open("sb_dictionary.p", "wb"))
     pickle.dump((composed_bases_list, simple_bases_lists), open("lists.p", "wb"))
 
-    return composed_bases_dict, simple_bases_dict, composed_bases_list, simple_bases_lists
+    return
 

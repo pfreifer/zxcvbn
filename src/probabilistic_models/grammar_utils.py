@@ -34,15 +34,15 @@ def char_type(c):
     else : return 'S'
 
     
-def score(w, composed_bases_dict, simple_bases_dict):
+def score(w, cb_counter, sb_counter, composed_bases_dict, simple_bases_dict):
     B, Q = bases(w)
     S = 0
     if Q in composed_bases_dict:
-        S = composed_bases_dict[Q]
+        S = composed_bases_dict[Q]/cb_counter
     for b in B:
         if b in simple_bases_dict:
-            S *= simple_bases_dict[b]
+            S *= simple_bases_dict[b]/sb_counter
         else:
             S = 0
     return S
-    
+

@@ -5,8 +5,9 @@ from decimal import Decimal
 
 def probabilistic_model_guesses(password):
     scores = pickle.load(open("scores.p", "rb"))
-    (Q, B) = pickle.load(open("dictionaries.p", "rb"))
-    score_password = score(password, Q, B)
+    (cb_counter, Q) = pickle.load(open("cb_dictionary.p", "rb"))
+    (sb_counter, B) = pickle.load(open("sb_dictionary.p", "rb"))
+    score_password = score(password, cb_counter, sb_counter, Q, B)
     len_score = len(scores)
     rank_password = 0
     for i in range(len_score) :

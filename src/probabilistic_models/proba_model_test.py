@@ -24,11 +24,15 @@ def add_frequency_lists(frequency_lists_):
 
 
 if __name__ == "__main__":
+
     add_frequency_lists(fl)
-    (Q, B) = pickle.load(open("dictionaries.p", "rb"))
+    grammars.construct_grammar_model()
+    rs.scores(1000000)
+    (cb_counter, Q) = pickle.load(open("cb_dictionary.p", "rb"))
+    (sb_counter, B) = pickle.load(open("sb_dictionary.p", "rb"))
 
-    print(gru.score("qwerty", Q, B))
-    print(gru.score("abc123", Q, B))
+    print(gru.score("qwerty", cb_counter, sb_counter, Q, B))
+    print(gru.score("abc123", cb_counter, sb_counter, Q, B))
 
-    #rs.scores(1000000)
+
     print(probabilistic_model_guesses("password"))
