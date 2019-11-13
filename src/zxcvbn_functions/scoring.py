@@ -204,9 +204,7 @@ def most_guessable_match_sequence(password, matches, _exclude_additive=False):
         bruteforce_update(k)
 
     optimal_match_sequence = unwind(n)
-    print(optimal_match_sequence)
     optimal_l = len(optimal_match_sequence)
-    print(optimal_l)
 
     # corner: empty password
     if len(password) == 0:

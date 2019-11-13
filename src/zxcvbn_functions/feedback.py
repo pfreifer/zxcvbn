@@ -88,6 +88,13 @@ def get_match_feedback(match, is_sole_match):
                 _('Avoid dates and years that are associated with you.'),
             ],
         }
+    elif match['pattern'] == 'probabilistic_model':
+        return {
+            'warning': _("Sequences of same types of character are easier to guess"),
+            'suggestions': [
+                _('You should alternate the different types of character'),
+            ],
+        }
 
 
 def get_dictionary_match_feedback(match, is_sole_match):

@@ -1,6 +1,7 @@
 from datetime import datetime
-
+from src.probabilistic_models import probabilistic_model
 from . import matching, scoring, time_estimates, feedback
+
 
 def zxcvbn(password, user_inputs=None):
     try:
@@ -26,6 +27,9 @@ def zxcvbn(password, user_inputs=None):
 
     matches = matching.omnimatch(password, ranked_dictionaries)
     result = scoring.most_guessable_match_sequence(password, matches)
+    result_proba = probabilistic_model.probabilistic_model_result(password)
+    if result_proba["guesses"] < result["guesses"]:
+        result = result_proba
     result['calc_time'] = datetime.now() - start
 
     attack_times = time_estimates.estimate_attack_times(result['guesses'])

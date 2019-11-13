@@ -1,5 +1,4 @@
 import pickle
-
 import probabilistic_models.grammar_utils as gru
 import probabilistic_models.random_set as rs
 
@@ -26,12 +25,10 @@ def add_frequency_lists(frequency_lists_):
 
 if __name__ == "__main__":
     add_frequency_lists(fl)
-
-    Q, B, lc, ls = grammars.construct_grammar_model()
+    (Q, B) = pickle.load(open("dictionaries.p", "rb"))
 
     print(gru.score("qwerty", Q, B))
     print(gru.score("abc123", Q, B))
 
-    # print(rs.scores(1000000, lc, ls, Q, B))
-    rs.scores(1000000)
+    #rs.scores(1000000)
     print(probabilistic_model_guesses("password"))

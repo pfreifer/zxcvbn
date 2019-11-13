@@ -1,6 +1,7 @@
 from src import zxcvbn_functions as zx
 
-results = zx.zxcvbn('immeuble')
+results = zx.zxcvbn('cloudpasswordmoon')
+
 
 for x in results:
     try:
