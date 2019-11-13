@@ -1,0 +1,48 @@
+
+def build_ranked_dict(ordered_list):
+    return {word: idx for idx, word in enumerate(ordered_list, 1)}
+
+RANKED_DICTIONARIES = {}
+
+def add_frequency_lists(frequency_lists_):
+    for name, lst in frequency_lists_.items():
+        RANKED_DICTIONARIES[name] = build_ranked_dict(lst)
+
+
+def cut(composed_base):
+    res = []
+    b = composed_base[0]
+    for i in range(1, len(composed_base)):
+        if composed_base[i].isdigit():
+            b += composed_base[i]
+        else:
+            res.append(b)
+            b = composed_base[i]
+    res.append(b)
+    return res
+        
+        
+def bases(w) :
+
+    simple_bases = []
+    composed_base = ''
+    word =''
+    for c in w:
+        if word == '': word = c
+        elif char_type(word[-1]) == char_type(c):
+            word += c
+        else :
+            simple_bases.append(word)
+            composed_base += char_type(word[-1]) + str(len(word))
+            word = c
+    simple_bases.append(word)
+    composed_base += char_type(word[-1]) + str(len(word))
+    return simple_bases, composed_base
+
+def char_type(c):
+    if c.isdigit() : return 'D'
+    elif c.isalpha(): return 'L'
+    else : return 'S'
+
+
+    
