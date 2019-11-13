@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from zxcvbn.frequency_lists import FREQUENCY_LISTS
+from frequency_lists import FREQUENCY_LISTS
 
 
 class TestRankedDictionaries(TestCase):

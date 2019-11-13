@@ -1,5 +1,5 @@
 import json
-from zxcvbn import zxcvbn
+from src.zxcvbn_functions import zxcvbn
 import sys, getopt
 from decimal import Decimal
 

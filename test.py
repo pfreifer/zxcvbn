@@ -1,4 +1,4 @@
-import zxcvbn as zx
+from src import zxcvbn_functions as zx
 
 results = zx.zxcvbn('qw56erty')
 

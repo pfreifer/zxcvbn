@@ -1,16 +1,21 @@
-from zxcvbn.zxcvbn.frequency_lists import FREQUENCY_LISTS
-import zxcvbn.probabilistic_models.grammar_utils as gru
+import probabilistic_models.grammar_utils as gru
+from zxcvbn_functions.frequency_lists import FREQUENCY_LISTS
+
 
 def build_ranked_dict(ordered_list):
     return {word: idx for idx, word in enumerate(ordered_list, 1)}
 
+
 RANKED_DICTIONARIES = {}
+
 
 def add_frequency_lists(frequency_lists_):
     for name, lst in frequency_lists_.items():
         RANKED_DICTIONARIES[name] = build_ranked_dict(lst)
 
+
 add_frequency_lists(FREQUENCY_LISTS)
+
 
 def construct_grammar_model(_ranked_dictionaries=RANKED_DICTIONARIES):
     composed_bases_dict = dict()

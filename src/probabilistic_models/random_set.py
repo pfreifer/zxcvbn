@@ -1,4 +1,4 @@
-import grammar_utils as gru
+import probabilistic_models.grammar_utils as gru
 from random import choice
 
 

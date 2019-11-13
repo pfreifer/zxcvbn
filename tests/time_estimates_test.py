@@ -1,4 +1,4 @@
-from zxcvbn.time_estimates import estimate_attack_times
+from src.zxcvbn_functions import estimate_attack_times
 import sys
 
 def test_long_ints_dont_overflow():

@@ -1,7 +1,7 @@
-from zxcvbn.zxcvbn import scoring
-from zxcvbn.zxcvbn.scoring import most_guessable_match_sequence
+from src.zxcvbn_functions import scoring
+from src.zxcvbn_functions.scoring import most_guessable_match_sequence
 from . import adjacency_graphs
-from zxcvbn.zxcvbn.frequency_lists import FREQUENCY_LISTS
+from src.zxcvbn_functions.frequency_lists import FREQUENCY_LISTS
 import re
 
 

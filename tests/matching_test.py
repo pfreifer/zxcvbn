@@ -1,7 +1,5 @@
-from unittest import TestCase
-
-from zxcvbn import adjacency_graphs
-from zxcvbn import matching
+import adjacency_graphs
+from src.zxcvbn_functions import matching
 
 
 # takes a pattern and list of prefixes/suffixes

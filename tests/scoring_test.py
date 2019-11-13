@@ -1,7 +1,6 @@
-import re
-from zxcvbn import matching
-from zxcvbn import scoring
-from zxcvbn.adjacency_graphs import ADJACENCY_GRAPHS
+from src.zxcvbn_functions import matching
+import scoring
+from adjacency_graphs import ADJACENCY_GRAPHS
 
 
 def test_returns_average_degree():
@@ -27,7 +26,7 @@ def test_nCk():
     k = 12
     assert scoring.nCk(n, k) == scoring.nCk(n, n - k), "mirror identity"
     assert scoring.nCk(n, k) == (
-        scoring.nCk(n - 1, k - 1) + scoring.nCk(n - 1, k)
+            scoring.nCk(n - 1, k - 1) + scoring.nCk(n - 1, k)
     ), "pascal's triangle identity"
 
 
@@ -281,11 +280,11 @@ def test_spatial_guesses():
         'shifted_count': 0,
     }
     base_guesses = (
-        scoring.KEYBOARD_STARTING_POSITIONS *
-        scoring.KEYBOARD_AVERAGE_DEGREE *
-        # - 1 term because: not counting spatial patterns of length 1
-        # eg for length==6, multiplier is 5 for needing to try len2,len3,..,len6
-        (len(match['token']) - 1)
+            scoring.KEYBOARD_STARTING_POSITIONS *
+            scoring.KEYBOARD_AVERAGE_DEGREE *
+            # - 1 term because: not counting spatial patterns of length 1
+            # eg for length==6, multiplier is 5 for needing to try len2,len3,..,len6
+            (len(match['token']) - 1)
     )
     msg = "with no turns or shifts, guesses is starts * degree * (len-1)"
     assert scoring.spatial_guesses(match) == base_guesses, msg
@@ -408,7 +407,7 @@ def test_l33t_variants():
         ['a4a4aa', scoring.nCk(6, 2) + scoring.nCk(6, 1), {'4': 'a'}],
         ['4a4a44', scoring.nCk(6, 2) + scoring.nCk(6, 1), {'4': 'a'}],
         ['a44att+', (scoring.nCk(4, 2) + scoring.nCk(4, 1)) *
-                scoring.nCk(3, 1), {'4': 'a', '+': 't'}],
+                    scoring.nCk(3, 1), {'4': 'a', '+': 't'}],
     ]:
         match = {
             'token': word,

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from zxcvbn import zxcvbn
+from src.zxcvbn_functions import zxcvbn
 
 
 def test_unicode_user_inputs():

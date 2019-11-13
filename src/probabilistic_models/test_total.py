@@ -1,4 +1,4 @@
-import zxcvbn.zxcvbn as zx
+from src import zxcvbn_functions as zx
 
 results = zx.zxcvbn('immeuble')
 

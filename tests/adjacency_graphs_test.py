@@ -1,4 +1,4 @@
-from zxcvbn.adjacency_graphs import ADJACENCY_GRAPHS
+from adjacency_graphs import ADJACENCY_GRAPHS
 
 
 def test_adjacency_graphs_dict():
